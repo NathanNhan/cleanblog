@@ -3,6 +3,10 @@
   require_once '../includes/header.php';
   //Nhúng PDO vào để thao tác truy vấn xuống database
   require_once '../config/config.php';
+  //If session username có tồn tại thì chuyển sang trang chủ 
+  if(isset($_SESSION['username'])) {
+    header('Location: ../index.php');
+   }
   if(isset($_POST['submit'])) {
     // $_GET['name'] -> lấy các giá trị của các input form thông qua phương thức GET 
     // $_POST['name'] -> lấy ra các giá trị input nhập vào của form thông qua phương thức POST 
