@@ -26,6 +26,7 @@
       if($login->rowCount() > 0) {
         if(password_verify($password, $row["password"])) {
           $_SESSION["username"] = $row["username"];
+          $_SESSION["userid"] = $row['id'];
           header('Location: http://cleanblog.test/');
         }
       }

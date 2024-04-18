@@ -34,7 +34,7 @@
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <?php if(isset($_SESSION['username'])) : ?>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../index.php">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../posts/create.html">create</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../posts/create.php">create</a></li>
                         <div class="dropdown mt-1">
                             <a class="btn btn-outline dropdown-toggle text-white" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                 Hello, <?php echo $_SESSION['username'];   ?>
