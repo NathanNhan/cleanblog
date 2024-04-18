@@ -1,6 +1,33 @@
 
 <?php
    require_once '../includes/header.php';
+   require_once '../config/config.php';
+
+   if(isset($_POST['submit'])) {
+     if($_POST['email'] == '' or $_POST['password'] == '') {
+      echo 'You must be fill in one or more';
+     } else {
+      $email = $_POST['email'];
+      $password = $_POST['password']; 
+
+      $login = $conn->query("SELECT * from users where email = '$email'");
+
+      $login->execute();
+      // stdObject -> Array => count (Array) > 0 -> Verify password == success -> login
+      $row = $login->FETCH(PDO::FETCH_ASSOC);
+      print_r($row);
+      // array (
+      //   array("email" => 'abc@gmail.com'),
+      //   array("password" => 'abbkscv.asdlkja')
+      // )
+      if($login->rowCount() > 0) {
+        if(password_verify($password, $row["password"])) {
+          echo "Login successfully";
+        }
+      }
+
+     }
+   }
 
 ?>
                 <!-- Main Content-->
