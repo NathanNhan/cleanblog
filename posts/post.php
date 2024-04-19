@@ -42,7 +42,7 @@
                           <?php echo $row->body; ?><br>
 
                           <a href="delete.php?id=<?php echo $row->id ?>" class="btn btn-danger text-center float-end">Delete</a>
-                          <a href="" class="btn btn-warning text-center">Update</a>
+                          <a href="update.php?id=<?php echo $row->id ?>" class="btn btn-warning text-center">Update</a>
                           </div>
                 </div>
             </div>
