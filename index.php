@@ -18,14 +18,14 @@
                        foreach ($rows as $row) {
                         ?>
                            <div class="post-preview">
-                               <a href="posts/post.html?id=<?php echo $row["id"]; ?>">
+                               <a href="posts/post.php?id=<?php echo $row["id"]; ?>">
                                    <h2 class="post-title"><?php echo $row['title']; ?></h2>
                                    <h3 class="post-subtitle"><?php echo $row['subtitle']; ?></h3>
                                </a>
                                <p class="post-meta">
                                    Posted by
                                    <a href="#!"><?php echo $row['user_name']; ?></a>
-                                   on <?php echo date('m', strtotime($row['created_at'])) . date('d', strtotime($row['created_at'])) . date('Y', strtotime($row['created_at']));?>
+                                   on <?php echo date('m', strtotime($row['created_at'])) . '-' . date('d', strtotime($row['created_at'])) . '-' . date('Y', strtotime($row['created_at']));?>
                                </p>
                            </div>
                            <!-- Divider-->
