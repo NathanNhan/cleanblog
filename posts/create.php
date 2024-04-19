@@ -7,20 +7,21 @@ if(isset($_POST['submit'])) {
   } else {
     $title = $_POST['title'];
     $subtitle = $_POST['subtitle'];
-    $body = $_POST['body'];
-    //Lấy tên hình
+    $body = $_REQUEST['body'];
+    
+    
     $image = $_FILES['img']['name'];
     // print_r($_FILES['img']);
     //Khai báo đường dẫn lưu hình vào
     $dir = 'images/' . basename($image);
     
     //Insert xuống database
-    $insert = $conn->prepare("INSERT INTO posts (title,subtitle,body,image,user_id,user_name) VALUES (:title, :subtitle,:body,:image,:user_id,:user_name)");
+    $insert = $conn->prepare("INSERT INTO posts (title,subtitle,image,body,user_id,user_name) VALUES (:title, :subtitle,:image,:body,:user_id,:user_name)");
     $insert->execute([
         ':title' => $title,
         ':subtitle' => $subtitle,
-        ':body' => $body, 
         ':image' => $image,
+        ':body' => $body, 
         ':user_id' => $_SESSION['userid'],
         ':user_name' => $_SESSION['username']
     ]);
@@ -37,7 +38,7 @@ if(isset($_POST['submit'])) {
                 <!-- Main Content-->
         <div class="container px-4 px-lg-5">
 
-            <form method="POST" action="create.php" enctype="multipart/form-data">
+            <form method="POST" action="create.php" enctype="multipart/form-data" id="form2Example1">
               <!-- Email input -->
               <div class="form-outline mb-4">
                 <input type="text" name="title" id="form2Example1" class="form-control" placeholder="title" />

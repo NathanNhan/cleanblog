@@ -1,9 +1,6 @@
-<?php
 
-  session_start();
-?>
         <!-- Navigation-->
-        <?php require_once './includes/navbar.php' ?>
+        <?php require_once 'navbar.php' ?>
         <!-- Page Header-->
         <header class="masthead" style="background-image: url('../assets/img/home-bg.jpg')">
             <div class="container position-relative px-4 px-lg-5">

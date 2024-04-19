@@ -39,8 +39,11 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                          <?php echo $row->body; ?>
-                    </div>
+                          <?php echo $row->body; ?><br>
+
+                          <a href="delete.php?id=<?php echo $row->id ?>" class="btn btn-danger text-center float-end">Delete</a>
+                          <a href="" class="btn btn-warning text-center">Update</a>
+                          </div>
                 </div>
             </div>
         </article>
