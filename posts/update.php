@@ -11,6 +11,10 @@ require_once '../config/config.php';
             $post->execute();
             //Convert sang đối tượng thông phương thức fetch()
             $row = $post->fetch(PDO::FETCH_OBJ);
+            //Kiểm tra Nếu không phải tác giả bài viết thì quay về trang chủ 
+            if($_SESSION['userid'] !== $row->user_id) {
+              header('location: ../index.php');
+            }
         }
 //cập nhật bài viết theo ID
 if(isset($_POST['submit'])) {
