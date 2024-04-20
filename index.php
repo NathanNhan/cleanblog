@@ -8,6 +8,17 @@
  //Bước 3: Lấy về kết quả theo kiểu mảng
  $rows = $posts->fetchAll(PDO::FETCH_ASSOC);
 //  print_r($rows);
+
+
+//  Bước 1: Các bạn viết câu truy vấn query
+$categories = $conn->query("select * from category");
+ // Bước 2: Chạy câu truy vấn query
+ $categories->execute();
+ //Bước 3: Lấy về kết quả theo kiểu mảng
+ $rows_category = $categories->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 ?>
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
@@ -40,6 +51,17 @@
                     
                 </div>
             </div>
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                <?php foreach ($rows_category as $category) {   
+                    ?>
+                        <a href="" class="btn btn-secondary text-white">
+                            <?php echo $category["name"] ?>
+                        </a>
+                        <?php
+                } ?>
+                </div>
+            </div>    
         </div>
         <!-- Footer-->
 <?php
