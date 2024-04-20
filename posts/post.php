@@ -40,7 +40,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                           <?php echo $row->body; ?><br>
-                          <?php if($_SESSION['userid'] == $row->user_id) : ?>
+                          <?php if(isset($_SESSION['userid']) and $_SESSION['userid'] == $row->user_id) : ?>
                           <a href="delete.php?id=<?php echo $row->id ?>" class="btn btn-danger text-center float-end">Delete</a>
                           <a href="update.php?id=<?php echo $row->id ?>" class="btn btn-warning text-center">Update</a>
                           <?php endif; ?>
