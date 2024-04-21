@@ -23,7 +23,7 @@ $categories = $conn->query("select * from category");
         <!-- Main Content-->
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="col-md-10 col-lg-8 col-xl-7" id="load_data_container">
                     <!-- Post preview-->
                     <?php
                        foreach ($rows as $row) {
@@ -46,6 +46,10 @@ $categories = $conn->query("select * from category");
                        }
                     
                     ?>
+                    <div class="mx-auto mb-5 d-flex justify-content-center" id="remove_row">
+                        <button id="loadmore" class="btn btn-info text-center text-white" last-id=<?php echo $row['id'] ?>>Load More</button>
+
+                    </div>
                     
 
                     
@@ -60,10 +64,39 @@ $categories = $conn->query("select * from category");
                         </a>
                         <?php
                 } ?>
+               
                 </div>
             </div>    
         </div>
         <!-- Footer-->
+        <!-- //Nhúng jquery vào  -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            $(document).ready(function(){
+                $(document).on("click","#loadmore",function(){
+                    var last_post_id = $(this).attr("last-id");
+                    console.log(last_post_id); 
+                    //Lần đầu: last post id = 20
+                    //Lần 2: last post id = 22
+                    //Lần cuối: last post id = 24  
+                    $("#loadmore").html("loading");
+                    $.ajax({
+                        url: "loadmore.php",
+                        method : "POST",
+                        data : {last_post_id: last_post_id},
+                        dataType : 'text',
+                        success: (data) => {
+                            if(data != '') {
+                                $("#remove_row").remove();
+                                $('#load_data_container').append(data);
+                            } else {
+                                $('#loadmore').hide();
+                            }
+                        }  
+                    })
+                })
+            });
+        </script>
 <?php
  require_once './includes/footer.php';
 
