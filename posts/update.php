@@ -15,41 +15,45 @@ require_once '../config/config.php';
             if($_SESSION['userid'] !== $row->user_id) {
               header('location: ../index.php');
             }
+            //cập nhật bài viết theo ID
+            if(isset($_POST['submit'])) {
+              if($_POST['title'] == '' or $_POST['subtitle'] == '' or $_POST['body'] = '') {
+                echo "<div class='alert alert-danger text-center' role='alert'>
+                           Please fill one or more fields
+                      </div>";
+              } else {
+                $title = $_POST['title'];
+                $subtitle = $_POST['subtitle'];
+                $body = $_REQUEST['body'];
+                
+                
+                $image = $_FILES['img']['name'];
+                //Nếu tồn tại 1 hình ảnh mới thì ta xóa ảnh cũ đi
+                if(isset($image)) {
+                    unlink("images/".$row->image."");
+                }
+                // print_r($_FILES['img']);
+                //Khai báo đường dẫn lưu hình vào
+                $dir = 'images/' . basename($image);
+                
+                //Update xuống database
+                $update = $conn->prepare("UPDATE posts SET title = :title, subtitle = :subtitle, image = :image, body=:body where id = '$id'");
+                $update->execute([
+                    ':title' => $title,
+                    ':subtitle' => $subtitle,
+                    ':image' => $image,
+                    ':body' => $body, 
+                ]);
+                //Move đường dẫn cái hình từ máy tính local của mình vào trong cái thư mục images của dự án
+                if(move_uploaded_file($_FILES['img']['tmp_name'], $dir)) {
+                    //Chuyển sang trang chủ khi tạo bài viết và di chuyển file hình vào dự án thành công
+                    header('location: ../index.php');
+                }
+              }
+            }
+        } else {
+            header('location: ../404.php');
         }
-//cập nhật bài viết theo ID
-if(isset($_POST['submit'])) {
-  if($_POST['title'] == '' or $_POST['subtitle'] == '' or $_POST['body'] = '') {
-    echo 'One or more field empty';
-  } else {
-    $title = $_POST['title'];
-    $subtitle = $_POST['subtitle'];
-    $body = $_REQUEST['body'];
-    
-    
-    $image = $_FILES['img']['name'];
-    //Nếu tồn tại 1 hình ảnh mới thì ta xóa ảnh cũ đi
-    if(isset($image)) {
-        unlink("images/".$row->image."");
-    }
-    // print_r($_FILES['img']);
-    //Khai báo đường dẫn lưu hình vào
-    $dir = 'images/' . basename($image);
-    
-    //Update xuống database
-    $update = $conn->prepare("UPDATE posts SET title = :title, subtitle = :subtitle, image = :image, body=:body where id = '$id'");
-    $update->execute([
-        ':title' => $title,
-        ':subtitle' => $subtitle,
-        ':image' => $image,
-        ':body' => $body, 
-    ]);
-    //Move đường dẫn cái hình từ máy tính local của mình vào trong cái thư mục images của dự án
-    if(move_uploaded_file($_FILES['img']['tmp_name'], $dir)) {
-        //Chuyển sang trang chủ khi tạo bài viết và di chuyển file hình vào dự án thành công
-        header('location: ../index.php');
-    }
-  }
-}
 ?>
        
         <div class="container px-4 px-lg-5">

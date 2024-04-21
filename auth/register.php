@@ -11,7 +11,9 @@
     // $_GET['name'] -> lấy các giá trị của các input form thông qua phương thức GET 
     // $_POST['name'] -> lấy ra các giá trị input nhập vào của form thông qua phương thức POST 
     if($_POST['email'] == '' or $_POST['username'] == '' or $_POST['password'] == '') {
-      echo 'Please fill in one field or more';
+       echo "<div class='alert alert-danger text-center' role='alert'>
+               Please fill one or more fields
+            </div>";
     } else {
       $email = $_POST['email'];
       $username = $_POST['username'];

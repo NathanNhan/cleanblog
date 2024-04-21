@@ -12,7 +12,9 @@ $categories = $conn->query("select * from category");
 
 if(isset($_POST['submit'])) {
   if($_POST['title'] == '' or $_POST['subtitle'] == '' or $_POST['body'] == '' or $_POST['category_id'] == '') {
-    echo 'One or more field empty';
+    echo "<div class='alert alert-danger text-center' role='alert'>
+               Please fill one or more fields
+          </div>";
   } else {
     $title = $_POST['title'];
     $subtitle = $_POST['subtitle'];

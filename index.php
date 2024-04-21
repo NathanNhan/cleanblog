@@ -2,7 +2,7 @@
  require_once './includes/header.php';
  require_once './config/config.php'; 
 //  Bước 1: Các bạn viết câu truy vấn query
- $posts = $conn->query("select * from posts");
+ $posts = $conn->query("select * from posts limit 2");
  // Bước 2: Chạy câu truy vấn query
  $posts->execute();
  //Bước 3: Lấy về kết quả theo kiểu mảng

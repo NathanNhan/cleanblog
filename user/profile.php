@@ -12,6 +12,9 @@ require_once '../config/config.php';
             $user->execute();
             //Convert sang đối tượng thông phương thức fetch()
             $row = $user->fetch(PDO::FETCH_OBJ);
+            if($_SESSION['userid'] != $id) {
+                header ('location: ../index.php');
+            }
 
         }
 //cập nhật bài viết theo ID

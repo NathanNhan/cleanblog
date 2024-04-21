@@ -12,6 +12,8 @@
             $post->execute();
             //Convert sang đối tượng thông phương thức fetch()
             $row = $post->fetch(PDO::FETCH_OBJ);
+        } else {
+            header('location: ../404.php');
         }
         
         

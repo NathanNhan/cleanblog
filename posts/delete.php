@@ -19,6 +19,8 @@ if(isset($_GET['id']) ) {
         ]);   
     }  
     header('location: ../index.php');
+} else {
+    header('location: ../404.php');
 }
 
 

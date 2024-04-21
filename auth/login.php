@@ -8,7 +8,9 @@
    }
    if(isset($_POST['submit'])) {
      if($_POST['email'] == '' or $_POST['password'] == '') {
-      echo 'You must be fill in one or more';
+      echo "<div class='alert alert-danger text-center' role='alert'>
+                Please fill one or more field
+            </div>";
      } else {
       $email = $_POST['email'];
       $password = $_POST['password']; 
@@ -28,7 +30,15 @@
           $_SESSION["username"] = $row["username"];
           $_SESSION["userid"] = $row['id'];
           header('Location: http://cleanblog.test/');
+        } else {
+          echo "<div class='alert alert-danger text-center' role='alert'>
+                Password Wrong
+                </div>";
         }
+      } else {
+        echo "<div class='alert alert-danger text-center' role='alert'>
+                Can not found user with email
+            </div>";
       }
 
      }
