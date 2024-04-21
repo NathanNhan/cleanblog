@@ -38,7 +38,7 @@
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="../user/profile.php?id=<?php echo $_SESSION['userid']; ?>">Profile</a></li>
                                 <li><a class="dropdown-item" href="../auth/logout.php">Log out</a></li>
                             </ul>
                         </div>
