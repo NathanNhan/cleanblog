@@ -3,8 +3,12 @@
 
 
 <?php  
+   $select = $conn->query("select * from admin");
+   $select->execute();
 
-
+   $admins = $select->fetchAll(PDO::FETCH_ASSOC);
+  //  print_r($admins);
+  
   
 
 ?>
@@ -14,7 +18,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title mb-4 d-inline">Admins</h5>
-             <a  href="http://localhost/clean-blog/admin-panel/admins/create-admins.php" class="btn btn-primary mb-4 text-center float-right">Create Admins</a>
+             <a  href="http://cleanblog.test/admin-panel/admins/create-admins.php" class="btn btn-primary mb-4 text-center float-right">Create Admins</a>
               <table class="table">
                 <thead>
                   <tr>
@@ -24,13 +28,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                 
+                 <?php foreach($admins as $admin) : ?>
                     <tr>
-                      <th></th>
-                      <td></td>
-                      <td></td>
+                      <th><?php echo $admin['id'] ?></th>
+                      <td><?php echo $admin['adminname'] ?></td>
+                      <td><?php echo $admin['email'] ?></td>
                     </tr>
-                  
+                  <?php endforeach; ?>
                 </tbody>
               </table> 
             </div>

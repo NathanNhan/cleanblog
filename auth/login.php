@@ -3,7 +3,7 @@
    require_once '../includes/header.php';
    require_once '../config/config.php';
    //Nếu session user có tồn tại -> tức là đã đăng nhập -> redirect về trang chủ 
-   if(isset($_SESSION['username'])) {
+   if(!isset($_SESSION['username'])) {
     header('Location: ../index.php');
    }
    if(isset($_POST['submit'])) {

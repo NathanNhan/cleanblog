@@ -4,7 +4,7 @@
   //Nhúng PDO vào để thao tác truy vấn xuống database
   require_once '../config/config.php';
   //If session username có tồn tại thì chuyển sang trang chủ 
-  if(isset($_SESSION['username'])) {
+  if(!isset($_SESSION['username'])) {
     header('Location: ../index.php');
    }
   if(isset($_POST['submit'])) {
