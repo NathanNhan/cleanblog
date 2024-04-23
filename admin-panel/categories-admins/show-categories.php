@@ -1,7 +1,9 @@
 <?php require "../layouts/header.php"; ?>
 <?php require "../../config/config.php"; ?>
 <?php 
-
+    if(!isset($_SESSION['adminname'])) {
+        header ('location: http://cleanblog.test/admin-panel/admins/login-admins.php');
+    }
    $select = $conn->query("select * from category");
    $select->execute();
    $categories = $select->fetchAll(PDO::FETCH_ASSOC);

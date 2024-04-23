@@ -1,11 +1,26 @@
 <?php require "../layouts/header.php"; ?>
 <?php require "../../config/config.php"; ?>
 <?php  
-
-
-    
-
-
+if(!isset($_SESSION['adminname'])) {
+  header ('location: http://cleanblog.test/admin-panel/admins/login-admins.php');
+}
+    //Xử lý tạo mới chuyên mục bài viết 
+if(isset($_POST['submit'])) {
+  if($_POST['name'] == '') {
+    echo "<div class='alert alert-danger text-center' role='alert'>
+               Please fill one or more fields
+          </div>";
+  } else {
+    $category_name = $_POST['name'];
+    //Insert xuống database
+    $insert = $conn->prepare("INSERT INTO category (name) VALUES (:name)");
+    $insert->execute([
+        ':name' => $category_name,
+    ]);
+    //Move đường dẫn cái hình từ máy tính local của mình vào trong cái thư mục images của dự án
+    header('location: show-categories.php');
+  }
+}
 ?>
 
 <div class="row">
