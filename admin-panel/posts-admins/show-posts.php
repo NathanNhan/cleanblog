@@ -1,6 +1,10 @@
 <?php require "../layouts/header.php"; ?>
 <?php require "../../config/config.php"; ?>
 <?php 
+    
+    $select = $conn->query("SELECT posts.id, posts.title, category.name, posts.user_name from posts inner join category on posts.category_id = category.id");
+    $select->execute();
+    $row = $select->fetchAll(PDO::FETCH_ASSOC);
 
    
 
@@ -23,15 +27,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                
+                   <?php foreach($row as $post) : ?>
                     <tr>
-                      <th scope="row"></th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                     
+                      <th scope="row"><?php echo $post['id'] ?></th>
+                      <td><?php echo $post['title'] ?></td>
+                      <td><?php echo $post['name'] ?></td>
+                      <td><?php echo $post['user_name'] ?></td>
+                      <th>1</th>
+                      <th><a href="" class="btn btn-danger text-center">Delete</a></th>
                     </tr>
-                 
+                   <?php endforeach; ?>
                 </tbody>
               </table> 
             </div>
