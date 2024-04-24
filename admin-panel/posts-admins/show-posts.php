@@ -1,19 +1,14 @@
 <?php require "../layouts/header.php"; ?>
 <?php require "../../config/config.php"; ?>
 <?php 
-    //Mặc định lần đầu tiên hiển thị thì page = 1 
-    $start_from = 0;
     //Giới hạn số bài viết hiển thị cho 1 trang 
     $posts_per_page = 2;
-    $page = 1; 
     if(isset($_GET['page'])) {
       $page = intval($_GET['page']);
       //Tính vị trí bắt đầu lấy dữ liệu
       $start_from = ( $page - 1 ) * $posts_per_page;
     } 
     
-
-        
       $select = $conn->query("SELECT posts.id, posts.title, category.name, posts.user_name from posts inner join category on posts.category_id = category.id LIMIT $start_from , $posts_per_page");
       $select->execute();
       $row = $select->fetchAll(PDO::FETCH_ASSOC);
@@ -57,18 +52,24 @@
                    <nav aria-label="...">
                       <ul class="pagination pagination-lg">
                         <?php
+                           //Bước 1: Lấy về tổng số bài viết 
                            $totalPost = $conn->query("SELECT count(*) as total from posts;");
                            $totalPost->execute();
                            $total_posts = $totalPost->fetch(PDO::FETCH_OBJ);
                            
                            
-
+                           //Bước 2: Tính toán để in ra tổng số phân trang
                            $pagination_number = ceil((intval($total_posts->total) / $posts_per_page));
                           
                            //Vòng Lặp để in ra số phân trang
                            for ($i=1; $i <= $pagination_number ; $i++) { 
+                            if($page == $i) {
+                              $active = 'active';
+                            } else {
+                              $active = '';
+                            }
                             ?>
-                             <li class="page-item"><a class="page-link" href="show-posts.php?page=<?php echo $i ?>"><?php echo $i; ?></a></li>
+                             <li class="page-item <?php echo $active ?>"><a class="page-link" href="show-posts.php?page=<?php echo $i ?>"><?php echo $i; ?></a></li>
                             
                             <?php 
                            }
