@@ -41,7 +41,7 @@
                       <td><?php echo $post['name'] ?></td>
                       <td><?php echo $post['user_name'] ?></td>
                       <th>1</th>
-                      <th><a href="" class="btn btn-danger text-center">Delete</a></th>
+                      <th><a href="delete-posts.php?id=<?php echo $post['id']; ?>" class="btn btn-danger text-center">Delete</a></th>
                     </tr>
                    <?php endforeach; ?>
 
