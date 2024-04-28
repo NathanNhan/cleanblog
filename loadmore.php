@@ -4,7 +4,7 @@
       //Lấy id cuối cùng của bài viết
       $id = $_POST['last_post_id'];
       // Lấy bài viết có ID lớn hơn id cuối cùng và giới hạn lấy 2 bài 
-      $post = $conn->query("select * from posts where id > '$id' limit 2");
+      $post = $conn->query("select * from posts where id > '$id' and status = 1 limit 2");
       $post->execute();
       $allPosts = $post->fetchAll(PDO::FETCH_ASSOC);
       // 2 bài viết có id là 21 và 22

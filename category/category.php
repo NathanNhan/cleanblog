@@ -4,7 +4,7 @@
 //  Bước 1: Các bạn viết câu truy vấn query
  if(isset($_GET['cat_id'])) {
     $cat_id = $_GET['cat_id'];
-    $posts = $conn->query("select posts.id, category.name, posts.title, posts.subtitle, posts.user_name, posts.created_at from posts inner join category on posts.category_id = category.id where posts.category_id = '$cat_id'");
+    $posts = $conn->query("select posts.id, category.name, posts.title, posts.subtitle, posts.user_name, posts.created_at from posts inner join category on posts.category_id = category.id where posts.category_id = '$cat_id' and posts.status=1");
     // Bước 2: Chạy câu truy vấn query
     $posts->execute();
     //Bước 3: Lấy về kết quả theo kiểu mảng

@@ -9,7 +9,7 @@
       $start_from = ( $page - 1 ) * $posts_per_page;
     } 
     
-      $select = $conn->query("SELECT posts.id, posts.title, category.name, posts.user_name from posts inner join category on posts.category_id = category.id LIMIT $start_from , $posts_per_page");
+      $select = $conn->query("SELECT posts.id, posts.title, category.name, posts.user_name, posts.status from posts inner join category on posts.category_id = category.id LIMIT $start_from , $posts_per_page");
       $select->execute();
       $row = $select->fetchAll(PDO::FETCH_ASSOC);
 
@@ -30,7 +30,7 @@
                     <th scope="col">category</th>
                     <th scope="col">user</th>
                     <th scope="col">status</th>
-                    <th scope="col">delete</th>
+                    <th scope="col">Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -40,8 +40,15 @@
                       <td><?php echo $post['title'] ?></td>
                       <td><?php echo $post['name'] ?></td>
                       <td><?php echo $post['user_name'] ?></td>
-                      <th>1</th>
-                      <th><a href="delete-posts.php?id=<?php echo $post['id']; ?>" class="btn btn-danger text-center">Delete</a></th>
+                      <?php if($post['status'] == 0) : ?>
+                      <td><a href="status-posts.php?id=<?php echo $post['id']; ?>&status=<?php echo $post['status'] ?>" class="btn btn-danger text-center">UnApprove</a></td>
+                      <?php else:  ?>
+                      <td><a href="status-posts.php?id=<?php echo $post['id']; ?>&status=<?php echo $post['status'] ?>" class="btn btn-primary text-center">Approve</a></td>
+                      <?php endif; ?>
+                         
+                      
+                      <td><a href="delete-posts.php?id=<?php echo $post['id']; ?>" class="btn btn-danger text-center">Delete</a></td>
+                     
                     </tr>
                    <?php endforeach; ?>
 
