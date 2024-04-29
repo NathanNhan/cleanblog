@@ -15,7 +15,7 @@
 
             //Truy vấn lấy dữ liệu từ bảng comments 
             $comments = $conn->query("select comments.author, comments.comments, comments.created_at, comments.status_comment
-             from comments where id_post = '$id'");
+             from comments where id_post = '$id' and status_comment = 1");
              $comments->execute();
              $result = $comments->fetchAll(PDO::FETCH_ASSOC);
         } else {

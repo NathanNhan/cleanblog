@@ -42,7 +42,7 @@
             <a class="nav-link" href="http://cleanblog.test/admin-panel/posts-admins/show-posts.php?page=1" style="margin-left: 20px;">Posts</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://localhost/clean-blog/admin-panel/comments-admins/show-comments.php" style="margin-left: 20px;">Comments</a>
+            <a class="nav-link" href="http://cleanblog.test/admin-panel/comments-admins/show-comments.php" style="margin-left: 20px;">Comments</a>
           </li>
           
          
