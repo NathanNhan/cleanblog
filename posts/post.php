@@ -23,23 +23,22 @@
         }
 
         //Xử lý insert comment vào cơ sở dữ liệu
-        if(isset($_POST['submit']) AND isset($_GET['id'])) {
-            // id bài viết mà chúng ta bình luận
-            $id = $_GET['id']; 
-            // Tên người bình luận
-            $author_name = $_SESSION['username'];
-            //Nội dung comment 
-            $comment = $_POST['comment'];
-            //Viết câu truy vấn insert to databse 
-            $insert = $conn->prepare("INSERT INTO comments (id_post, author, comments) VALUES (:id_post, :author, :comments)");
-            $insert->execute([
-                ':id_post' => $id, 
-                ':author' => $author_name,
-                ':comments' => $comment
-            ]);
-            //Sau khi mà tạo mới bình luận cho bài viết thành công thì chúng ta sẽ cho quay lại trang chi tiết bài viết
-            header('location: post.php?id='.$id.'');
-
+        if(isset($_POST['submit']) AND isset($_GET['id']) AND $_POST['comment'] != '') {
+                // id bài viết mà chúng ta bình luận
+                $id = $_GET['id']; 
+                // Tên người bình luận
+                $author_name = $_SESSION['username'];
+                //Nội dung comment 
+                $comment = $_POST['comment'];
+                //Viết câu truy vấn insert to databse 
+                $insert = $conn->prepare("INSERT INTO comments (id_post, author, comments) VALUES (:id_post, :author, :comments)");
+                $insert->execute([
+                    ':id_post' => $id, 
+                    ':author' => $author_name,
+                    ':comments' => $comment
+                ]);
+                //Sau khi mà tạo mới bình luận cho bài viết thành công thì chúng ta sẽ cho quay lại trang chi tiết bài viết
+                header('location: post.php?id='.$id.'');
         }
         
         
@@ -82,7 +81,13 @@
           <div class="container my-5 py-5">
             <div class="row d-flex justify-content-center">
               <div class="col-md-12 col-lg-10 col-xl-8">
-               
+                <?php
+                 if(isset($_POST['submit']) AND $_POST['comment'] == '') {
+                     echo "<div class='alert alert-danger text-center' role='alert'>
+                           Please fill one or more fields
+                      </div>";
+                 }
+                ?>
                 <h3 class="mb-5">Comments</h3>  
                 <div class="card">
                     <?php foreach($result as $comment) : ?>        
@@ -104,7 +109,11 @@
                             <hr class="my-4" />
                     </div>
                     <?php endforeach; ?>
-                 
+                  <?php if(!isset($_SESSION['username'])) : ?>
+                       <div class='alert alert-danger text-center' role='alert'>
+                        <a href="http://cleanblog.test/auth/login.php">Login to write comment</a>
+                       </div>
+                  <?php else : ?>
                   <form method="POST" action="post.php?id=<?php echo $row->id;?>">
 
                         <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
@@ -122,6 +131,8 @@
                             </div>
                         </div>
                     </form>
+
+                  <?php endif; ?>
                       
                 </div>
               </div>
