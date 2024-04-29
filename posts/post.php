@@ -7,11 +7,17 @@
         if(isset($_GET['id'])) {
             $id = $_GET['id'];
             // Viết câu truy vấn query thông qua PDO 
-            $post = $conn->query("SELECT * FROM posts where id = '$id'");
+            $post = $conn->query("select * from posts where posts.id = '$id'");
             //Chạy câu truy vấn 
             $post->execute();
             //Convert sang đối tượng thông phương thức fetch()
             $row = $post->fetch(PDO::FETCH_OBJ);
+
+            //Truy vấn lấy dữ liệu từ bảng comments 
+            $comments = $conn->query("select comments.author, comments.comments, comments.created_at, comments.status_comment
+             from comments where id_post = '$id'");
+             $comments->execute();
+             $result = $comments->fetchAll(PDO::FETCH_ASSOC);
         } else {
             header('location: ../404.php');
         }
@@ -77,24 +83,27 @@
             <div class="row d-flex justify-content-center">
               <div class="col-md-12 col-lg-10 col-xl-8">
                
-                <h3 class="mb-5">Comments</h3>          
-                    <div class="card">
+                <h3 class="mb-5">Comments</h3>  
+                <div class="card">
+                    <?php foreach($result as $comment) : ?>        
                     <div class="card-body">
                         <div class="d-flex flex-start align-items-center">
                             <div>
                                 <h6 class="fw-bold text-primary">
-                                    Trọng Nhân
-                                    <h8 class="p-3 text-black">02/01/2024</h8>
+                                    <?php echo $comment['author'] ?>
+                                    <h8 class="p-3 text-black">
+                                        <?php echo date('m', strtotime($comment['created_at'])) . '-' . date('d', strtotime($comment['created_at'])) . '-' . date('Y', strtotime($comment['created_at']));?>
+                                    </h8>
                                 </h6>
                                 
                             </div>
                             </div>
                             <p class="mt-3 mb-4 pb-2">
-                              This is comments
+                              <?php echo $comment['comments']; ?>
                             </p>
                             <hr class="my-4" />
                     </div>
-                   
+                    <?php endforeach; ?>
                  
                   <form method="POST" action="post.php?id=<?php echo $row->id;?>">
 
