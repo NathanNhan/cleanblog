@@ -1,5 +1,5 @@
 <?php
- session_start();
+session_start();
 
 ?>
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="../css/styles.css" rel="stylesheet" />
     </head>
-    <body> 
+    <body>
        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="../index.php">Start Bootstrap</a>
@@ -29,12 +29,13 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <?php if(isset($_SESSION['username'])) : ?>
+                        <?php if (isset($_SESSION['username'])): ?>
+
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../index.php">Home</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../posts/create.php">create</a></li>
                         <div class="dropdown mt-1">
                             <a class="btn btn-outline dropdown-toggle text-white" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Hello, <?php echo $_SESSION['username'];   ?>
+                                Hello, <?php echo $_SESSION['username']; ?>
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -42,13 +43,18 @@
                                 <li><a class="dropdown-item" href="../auth/logout.php">Log out</a></li>
                             </ul>
                         </div>
-                        <?php else :  ?>
+                        <?php else: ?>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../auth/login.php">login</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../auth/register.php">register</a></li>
-                       <?php endif ; ?>
-                      
+                       <?php endif;?>
+
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="../contact.php">Contact</a></li>
                     </ul>
+                    <form method="POST" action="http://cleanblog.test/search.php" class="form-inline d-flex gap-3">
+                        <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
+  </form>
         </nav>
